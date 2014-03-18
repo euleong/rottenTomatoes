@@ -102,17 +102,19 @@ MBProgressHUD *loadingHud;
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         
+        [loadingHud hide:YES];
         if (connectionError) {
             [self.networkError setHidden:NO];
         }
         else {
-            [loadingHud hide:YES];
+            [self.networkError setHidden:YES];
             id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSLog(@"%@", object);
             
             movies = [object objectForKey:@"movies"];
-            [self.moviesList reloadData];
         }
+        
+        [self.moviesList reloadData];
 
     }];
 }
