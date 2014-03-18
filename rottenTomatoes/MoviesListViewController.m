@@ -105,6 +105,7 @@ MBProgressHUD *loadingHud;
         [loadingHud hide:YES];
         if (connectionError) {
             [self.networkError setHidden:NO];
+            movies = nil;
         }
         else {
             [self.networkError setHidden:YES];
